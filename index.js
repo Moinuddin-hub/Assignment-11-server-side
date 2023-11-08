@@ -29,7 +29,7 @@ async function run() {
     await client.connect();
 
     const userCollection = client.db("userService").collection("service");
-    const bookingCollection = client.db("userService").collection("Bookings");
+    const bookingCollection = client.db("userService").collection("bookings");
 
   app.post('/users',async(req,res)=>{
       const user=req.body;
@@ -41,7 +41,7 @@ async function run() {
   })
   // Booking
 
-  app.post('/users',async(req,res)=>{
+  app.post('/bookings',async(req,res)=>{
     const user=req.body;
     console.log("user", user);
     const result = await bookingCollection.insertOne(user);
