@@ -83,7 +83,36 @@ async function run() {
     console.log(result);
     res.send(result);
   });
+// update
+app.put("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  const data = req.body;
 
+  const filter = {
+    _id: new ObjectId(id),
+  };
+  const options = { upsert: true };
+  const updatedData = {
+    // service,photo,price,image,email,name,area,description
+    $set: {
+      service: data.service,
+      photo: data.photo,
+      price: data.price,
+      email: data.email,
+      name: data.name,
+      image: data.image,
+      area: data.area,
+      description: data.description,
+      
+    },
+  };
+  const result = await userCollection.updateOne(
+    filter,
+    updatedData,
+    options
+  );
+  res.send(result);
+});
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
