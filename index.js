@@ -5,7 +5,12 @@ require('dotenv').config();
 const app = express()
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(
+  cors({
+      origin: ['http://localhost:5173', 'https://fir-auth-7b78b.web.app'],
+      credentials: true,
+  }),
+)
 app.use(express.json());
 
 
